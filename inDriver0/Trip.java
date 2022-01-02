@@ -1,15 +1,17 @@
 package inDriver0;
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Trip {
+public class Trip implements Discount {
 	private int ID;
 	private Passenger passenger;
 	private Driver driver;
 	private String source, destination;
 	private double Price=0.0;
 	private LocalTime tripTime = LocalTime.now();
+        private LocalDate todaysDate = LocalDate.now();
 	private static ArrayList<Trip> allTrips = new ArrayList<Trip>();
 	private ArrayList<Driver> suggestedDrivers = new ArrayList<>();
 	private ArrayList<Driver> observers = new ArrayList<>();
@@ -26,7 +28,10 @@ public class Trip {
 	    this.destination=destination;
 		this.numOfPassengers = numOfPassengers;
 	    this.ID = allTrips.size()+1;
+            this.passenger.numOfTrips++;
 	}
+
+ 
 	
 	public void sendRatings(double rate) {
 	    driver.setDriverRating(rate);
@@ -36,6 +41,15 @@ public class Trip {
 	public void setPriceSuggestion(double price) {
 		suggestionPrice=price;
 	}
+
+    public void setTodaysDate(LocalDate todaysDate) {
+        this.todaysDate = todaysDate;
+    }
+
+    public LocalDate getTodaysDate() {
+        return todaysDate;
+    }
+        
 	
 	public Passenger getPassenger () {
 		return passenger;
@@ -107,11 +121,19 @@ public class Trip {
 		allTrips.add(trip);
 	}
 	
+        @Override
 	public String toString()
     {
         return "Passenger \n("+getPassenger() + ") \nDriver \n(" + getDriver() + ") \nSource: " + getSource()+
-        		" |Destenation: "+getDestination()+" |Price: "+getPrice()+" |Trip Time: "+getTime()+"\n";
+        		" |Destenation: "+getDestination()+" |Price: "+getPrice()+" |Trip Time: "+getTime()+" |Trip Date: "+getTodaysDate()+"\n";
     }
-        }
+
+    @Override
+    public double discount() {
+        
+            return this.Price;
+        
+    }
+}
   
 

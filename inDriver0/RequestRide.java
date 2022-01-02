@@ -14,11 +14,11 @@ public class RequestRide {
 	
 	registerAsObservers(passenger,tempTrip);
 	
-	double Discount = Admin.getInstance(passenger.getUser()).haveDiscount(tempTrip);
+	    boolean Discount = Admin.getInstance(passenger.getUser()).haveDiscount(tempTrip);
 	
 	recivePrice(tempTrip);
 	
-	int choose = chooseDriver(Discount,tempTrip);
+	int choose = chooseDriver(tempTrip.getPrice(),tempTrip);
 	
 	passenger.notifyDriverApproval((choose-1), tempTrip, true);
 	tempTrip.setDriver(Driver.getDrivers().get(choose-1));

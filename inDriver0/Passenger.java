@@ -1,15 +1,18 @@
 package inDriver0;
+import inDriver0.Admin;
+import java.text.ParseException;
 import java.util.*;
 
 public class Passenger implements Subject{
 	private User user;
+        	public int numOfTrips;
 	private ArrayList<Trip> trips= new ArrayList <>();
 	private static ArrayList<Passenger> allPassengers = new ArrayList<Passenger>();
 	
-	public Passenger(String userName, String eMail, String mobileNumber, String password ){
+	public Passenger(String userName, String eMail, String mobileNumber, String password,String birthDate ) throws ParseException{
 	    	
-	    	user = new User(userName, eMail, mobileNumber, password );
-	    	
+	    	user = new User(userName, eMail, mobileNumber, password,birthDate );
+	    	numOfTrips=0;
 	}
 	
 	public void register(User userData) {

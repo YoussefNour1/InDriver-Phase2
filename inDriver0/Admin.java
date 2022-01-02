@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class Admin {
 	static private Admin instance;
 	User user;
-	private ArrayList<Driver> driversPending = new ArrayList<Driver>();
-    private ArrayList<Passenger> suspendedPassengers = new ArrayList<Passenger>();
-    private ArrayList<Driver> suspendedDrivers = new ArrayList<Driver>();
-    private ArrayList<String> discountAreas = new ArrayList<String>();
+    private ArrayList<Driver> driversPending = new ArrayList<>();
+    private ArrayList<Passenger> suspendedPassengers = new ArrayList<>();
+    private ArrayList<Driver> suspendedDrivers = new ArrayList<>();
+    private ArrayList<String> discountAreas = new ArrayList<>();
     public ArrayList<Event> events = new ArrayList<>();
-    
+       
    	Admin(User user) {
     	this.user = user;
     }
@@ -96,7 +96,7 @@ public class Admin {
         }
     } 
 
-    public double haveDiscount(Trip trip) {
+    public boolean haveDiscount(Trip trip) {
     	double discount=0.9;
     	double nonDiscount=1;
     	for (int i = 0; i < getDiscountAreas().size(); i++) {
@@ -104,10 +104,10 @@ public class Admin {
     		System.out.println(getDiscountAreas().get(i));
     		if(trip.getDestination().equals(getDiscountAreas().get(i))) {
     			System.out.println(discount);
-        		return discount;
+        		return true;
         	}
 		}
-    	return nonDiscount;
+    	return false;
     	
     }
     
